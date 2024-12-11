@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Klaveri proov</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.1/lib/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
+    <script>
+      function setup() {
+        laius = 600; 
+        klahve = 24;
+        klahvivahe = laius / klahve;
+        createCanvas(laius, 200);
+        osc = new p5.Oscillator("sine");
+        for (nr = 0; nr < klahve; nr++) {
+          fill("white"); 
+          stroke(0);
+          rect(nr * klahvivahe, 0, klahvivahe, height);
+        }
+      }
+
+      function mousePressed() {
+        klahv = floor(mouseX / klahvivahe);
+        if (klahv >= 0 && klahv < klahve) {
+          sagedus = 440 * Math.pow(2, (klahv - 9) / 12); 
+          osc.freq(sagedus); 
+          osc.start(); 
+        }
+      }
+
+      function mouseReleased() {
+        osc.stop();
+      }
+    </script>
+  </head>
+  <body>
+    <h3>Klaver</h3>
+  </body>
+</html>
